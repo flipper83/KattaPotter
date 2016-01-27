@@ -10,6 +10,7 @@ public class BasketCalculatorTest {
   private static final List<String> EMPTY_BASKET = new ArrayList<>();
   private static final String FIRST_BOOK = "Philosopher stone";
   private static final String SECOND_BOOK = "The chamber of secrets";
+  private static final String THIRD_BOOK = "Prisoner of Azkaban";
   public static final int DELTA_ZERO = 0;
 
   @Test
@@ -59,6 +60,16 @@ public class BasketCalculatorTest {
     float amount = basketCalculator.calculatePrice(basket);
 
     assertEquals((8 * 2 * 0.95f) + 8 , amount, DELTA_ZERO);
+  }
+
+  @Test
+  public void shouldReturnPriceWithDiscountWithABasketWithThreeBooksAllDifferent() {
+    BasketCalculator basketCalculator = new BasketCalculator();
+    List<String> basket = givenBasketWithBooks(FIRST_BOOK, SECOND_BOOK, THIRD_BOOK);
+
+    float amount = basketCalculator.calculatePrice(basket);
+
+    assertEquals(8 * 3 * 0.90f , amount, DELTA_ZERO);
   }
 
   private List<String> givenBasketWithBooks(String... books) {
