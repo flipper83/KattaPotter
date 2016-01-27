@@ -1,6 +1,5 @@
 package com.flipper83.katapotter;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class BasketCalculator {
@@ -8,10 +7,12 @@ public class BasketCalculator {
   private static final float BOOK_DISCOUNT = 0.95f;
 
   public float calculatePrice(List<String> books) {
-    List<SetCollection> collections = addBooksToSetCollections(books);
+
+    NormalizeBasket normalizeBasket = new NormalizeBasket();
+    normalizeBasket.addBooks(books);
 
     float amount = 0.0f;
-    for (SetCollection collection : collections) {
+    for (SetCollection collection : normalizeBasket.getCollections()) {
       int numBooks = collection.numBooks();
       if (numBooks > 1) {
         amount += BOOK_PRICE * BOOK_DISCOUNT * numBooks;
@@ -20,28 +21,5 @@ public class BasketCalculator {
       }
     }
     return amount;
-  }
-
-  private List<SetCollection> addBooksToSetCollections(List<String> books) {
-    List<SetCollection> collections = new ArrayList<>();
-    for (String book : books) {
-      addBookToSetCollections(book, collections);
-    }
-    return collections;
-  }
-
-  private void addBookToSetCollections(String book, List<SetCollection> collections) {
-    boolean added = false;
-
-    for (int i = 0; i < collections.size() && !added; i++) {
-      SetCollection collection = collections.get(i);
-      added = collection.addBook(book);
-    }
-
-    if (!added) {
-      SetCollection newCollection = new SetCollection();
-      newCollection.addBook(book);
-      collections.add(newCollection);
-    }
   }
 }
