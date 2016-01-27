@@ -52,22 +52,24 @@ public class BasketCalculatorTest {
   }
 
   private List<String> givenBasketWithTwoDifferentBooks() {
-    List<String> basket = new ArrayList<>();
-    basket.add(FIRST_BOOK);
-    basket.add(SECOND_BOOK);
-    return basket;
+    return givenBasketWithBooks(FIRST_BOOK, SECOND_BOOK);
   }
 
   private List<String> givenBasketWithTwoSameBooks() {
-    List<String> basket = new ArrayList<>();
-    basket.add(FIRST_BOOK);
-    basket.add(FIRST_BOOK);
-    return basket;
+    return givenBasketWithBooks(FIRST_BOOK, FIRST_BOOK);
   }
 
   private List<String> givenBasketWithOneBook() {
+    return givenBasketWithBooks(FIRST_BOOK);
+  }
+
+  private List<String> givenBasketWithBooks(String... books) {
     List<String> basket = new ArrayList<>();
-    basket.add(FIRST_BOOK);
+    if (books != null) {
+      for (String book : books) {
+        basket.add(book);
+      }
+    }
     return basket;
   }
 }
