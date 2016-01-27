@@ -24,7 +24,7 @@ public class BasketCalculatorTest {
   @Test
   public void shouldReturnPriceWithoutDiscountWithABasketWithOneBook() {
     BasketCalculator basketCalculator = new BasketCalculator();
-    List<String> basket = givenBasketWithOneBook();
+    List<String> basket = givenBasketWithBooks(FIRST_BOOK);
 
     float amount = basketCalculator.calculatePrice(basket);
 
@@ -34,7 +34,7 @@ public class BasketCalculatorTest {
   @Test
   public void shouldReturnPriceWithoutDiscountWithABasketWithTwoSameBooks() {
     BasketCalculator basketCalculator = new BasketCalculator();
-    List<String> basket = givenBasketWithTwoSameBooks();
+    List<String> basket = givenBasketWithBooks(FIRST_BOOK, FIRST_BOOK);
 
     float amount = basketCalculator.calculatePrice(basket);
 
@@ -44,23 +44,11 @@ public class BasketCalculatorTest {
   @Test
   public void shouldReturnPriceWithDiscountWithABasketWithTwoDifferentBooks() {
     BasketCalculator basketCalculator = new BasketCalculator();
-    List<String> basket = givenBasketWithTwoDifferentBooks();
+    List<String> basket = givenBasketWithBooks(FIRST_BOOK, SECOND_BOOK);
 
     float amount = basketCalculator.calculatePrice(basket);
 
     assertEquals(8 * 2 * 0.95f, amount, DELTA_ZERO);
-  }
-
-  private List<String> givenBasketWithTwoDifferentBooks() {
-    return givenBasketWithBooks(FIRST_BOOK, SECOND_BOOK);
-  }
-
-  private List<String> givenBasketWithTwoSameBooks() {
-    return givenBasketWithBooks(FIRST_BOOK, FIRST_BOOK);
-  }
-
-  private List<String> givenBasketWithOneBook() {
-    return givenBasketWithBooks(FIRST_BOOK);
   }
 
   private List<String> givenBasketWithBooks(String... books) {
