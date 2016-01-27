@@ -59,7 +59,7 @@ public class BasketCalculatorTest {
 
     float amount = basketCalculator.calculatePrice(basket);
 
-    assertEquals((8 * 2 * 0.95f) + 8 , amount, DELTA_ZERO);
+    assertEquals((8 * 2 * 0.95f) + 8, amount, DELTA_ZERO);
   }
 
   @Test
@@ -69,7 +69,18 @@ public class BasketCalculatorTest {
 
     float amount = basketCalculator.calculatePrice(basket);
 
-    assertEquals(8 * 3 * 0.90f , amount, DELTA_ZERO);
+    assertEquals(8 * 3 * 0.90f, amount, DELTA_ZERO);
+  }
+
+  @Test
+  public void shouldReturnPriceWithDiscountWithABasketWithFiveBooksThreeDifferents() {
+    BasketCalculator basketCalculator = new BasketCalculator();
+    List<String> basket =
+        givenBasketWithBooks(FIRST_BOOK, SECOND_BOOK, FIRST_BOOK, THIRD_BOOK, SECOND_BOOK);
+
+    float amount = basketCalculator.calculatePrice(basket);
+
+    assertEquals((8 * 3 * 0.90f) + (8 * 2 * 0.95f), amount, DELTA_ZERO);
   }
 
   private List<String> givenBasketWithBooks(String... books) {
