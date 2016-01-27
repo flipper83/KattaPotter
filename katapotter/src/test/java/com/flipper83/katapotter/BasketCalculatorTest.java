@@ -18,15 +18,32 @@ public class BasketCalculatorTest {
 
     assertEquals(0, amount);
   }
-  
+
   @Test
   public void shouldReturnPriceWithoutDiscountWithABasketWithOneBook() {
     BasketCalculator basketCalculator = new BasketCalculator();
     List<String> basket = givenBasketWithOneBook();
-    
+
     int amount = basketCalculator.calculatePrice(basket);
 
     assertEquals(8, amount);
+  }
+
+  @Test
+  public void shouldReturnPriceWithoutDiscountWithABasketWithTwoSameBooks() {
+    BasketCalculator basketCalculator = new BasketCalculator();
+    List<String> basket = givenBasketWithTwoSameBooks();
+
+    int amount = basketCalculator.calculatePrice(basket);
+
+    assertEquals(8 * 2, amount);
+  }
+
+  private List<String> givenBasketWithTwoSameBooks() {
+    List<String> basket = new ArrayList<>();
+    basket.add(FIRST_BOOK);
+    basket.add(FIRST_BOOK);
+    return basket;
   }
 
   private List<String> givenBasketWithOneBook() {
