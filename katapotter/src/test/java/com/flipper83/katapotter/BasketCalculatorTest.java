@@ -48,7 +48,7 @@ public class BasketCalculatorTest {
 
     float amount = basketCalculator.calculatePrice(basket);
 
-    assertEquals(8 * 2 * 0.95, amount, DELTA_ZERO);
+    assertEquals(8 * 2 * 0.95f, amount, DELTA_ZERO);
   }
 
   private List<String> givenBasketWithTwoDifferentBooks() {
