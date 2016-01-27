@@ -4,7 +4,7 @@ import java.util.List;
 
 public class BasketCalculator {
   private static final int BOOK_PRICE = 8;
-  private static final float BOOK_DISCOUNT = 0.95f;
+  private static final float BOOK_DISCOUNT = 0.05f;
 
   public float calculatePrice(List<String> books) {
 
@@ -14,12 +14,13 @@ public class BasketCalculator {
     float amount = 0.0f;
     for (SetCollection collection : normalizeBasket.getCollections()) {
       int numBooks = collection.numBooks();
-      if (numBooks > 1) {
-        amount += BOOK_PRICE * BOOK_DISCOUNT * numBooks;
-      } else {
-        amount += BOOK_PRICE * numBooks;
-      }
+      float discount = calculateDiscount(numBooks);
+      amount += BOOK_PRICE * discount * numBooks;
     }
     return amount;
+  }
+
+  private float calculateDiscount(int numBooks) {
+    return 1.0f - ((numBooks - 1) * BOOK_DISCOUNT);
   }
 }
